@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile group: 'com.googlecode.json-simple', name:'json-simple',version:'1.1.1'
+	// https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
+	
+	// https://mvnrepository.com/artifact/javax.servlet/jstl
+compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.37'
+
+	
+	//libs의 모든폴더 의존성 주입..
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+	
+}
+
