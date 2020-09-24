@@ -13,21 +13,11 @@ public class FrontController{
 
     @RequestMapping(Constants.URL_PREFIX_nhn)
     public String nhn(HttpServletRequest httpRequest, Model model) throws Exception {
-    		String forward_url = "";
     		
             try{
-            	forward_url = "main/main";
+            	String forward_url = "main/main";
             	
-            	
-            	//주석변경 요망..
-            	String longitude = "127.110749";
-            	String latitude = "37.402158";
-            	
-//            	String longitude = "127.1138939";
-//            	String latitude = "36.8151290";
-            	
-            	model.addAttribute("longitude", longitude);
-            	model.addAttribute("latitude", latitude);
+            	System.out.println("::Contorller CALL::");
             	return forward_url;
             	
             }catch (Exception ex) {
