@@ -30,6 +30,7 @@ commit_to_helm:
   - echo "Gitops start"
   - wget -q https://github.com/mikefarah/yq/releases/download/3.3.4/yq_linux_amd64
   - mv yq_linux_amd64 yq && chmod +x yq
+  - chmod +x script/git-askpass-helper.sh
   - sh script/helm_push.sh $CI_COMMIT_SHORT_SHA $REPLICA_COUNT
 
 stage_deployment:
