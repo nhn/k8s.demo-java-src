@@ -28,7 +28,7 @@ commit_to_helm:
     PROJECT_NAME: "demo-app"
   script:
   - echo "Gitops start"
-  - wget -q https://github.com/mikefarah/yq/releases/download/3.3.4/yq_linux_amd64
+  - wget -q -N https://github.com/mikefarah/yq/releases/download/3.3.4/yq_linux_amd64
   - mv yq_linux_amd64 yq && chmod +x yq
   - chmod +x script/git-askpass-helper.sh
   - sh script/helm_push.sh $CI_COMMIT_SHORT_SHA $REPLICA_COUNT
@@ -39,7 +39,7 @@ stage_deployment:
    only:
    - master
    script:
-   - wget -q https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 
+   - wget -q -N https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 
    - mv jq-linux64 jq && chmod +x jq
    - apk --no-cache add curl
    - sh script/argo_deploy.sh  
