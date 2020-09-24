@@ -1,0 +1,44 @@
+image: docker:git
+
+stages: 
+    - build_image 
+    - commit_to_helm
+    - apply_to_argocd
+
+build_image:
+  stage: build_image
+  when: manual
+  allow_failure: false
+  only:
+  - master
+  variables:
+    PROJECT_NAME: "demo-app"
+  before_script:
+  - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+  script:
+  - echo "build docker image for client application"
+  - sh script/image_build_push.sh $CI_COMMIT_SHORT_SHA
+
+commit_to_helm:
+  stage: commit_to_helm
+  when: on_success
+  only:
+  - master
+  variables:
+    PROJECT_NAME: "demo-app"
+  script:
+  - echo "Gitops start"
+  - wget -q https://github.com/mikefarah/yq/releases/download/3.3.4/yq_linux_amd64
+  - mv yq_linux_amd64 yq && chmod +x yq
+  - sh script/helm_push.sh $CI_COMMIT_SHORT_SHA $REPLICA_COUNT
+
+stage_deployment:
+   stage: apply_to_argocd
+   when: on_success
+   only:
+   - master
+   script:
+   - wget -q https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 
+   - mv jq-linux64 jq && chmod +x jq
+   - apk --no-cache add curl
+   - sh script/argo_deploy.sh  
