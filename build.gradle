@@ -19,17 +19,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
-	compile group: 'com.googlecode.json-simple', name:'json-simple',version:'1.1.1'
+	 implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	// https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
 	
 	// https://mvnrepository.com/artifact/javax.servlet/jstl
-compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+implementation 'javax.servlet:jstl:1.2'
 // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
-compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.37'
+implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.37'
 
 	
 	//libs의 모든폴더 의존성 주입..
-	compile fileTree(dir: 'libs', include: ['*.jar'])
+	 implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	
 }
